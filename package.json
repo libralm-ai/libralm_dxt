@@ -1,0 +1,19 @@
+{
+  "name": "libralm-mcp-server",
+  "version": "1.0.0",
+  "description": "LibraLM MCP server for Claude Desktop",
+  "type": "module",
+  "main": "libralm_mcp_server.js",
+  "scripts": {
+    "start": "node libralm_mcp_server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "node-fetch": "^3.3.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "LibraLM Team",
+  "license": "MIT"
+}

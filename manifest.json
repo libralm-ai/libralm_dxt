@@ -1,0 +1,126 @@
+{
+  "dxt_version": "0.1",
+  "name": "libralm",
+  "version": "1.0.0",
+  "display_name": "LibraLM Book Knowledge",
+  "description": "Access 50+ book summaries and chapter breakdowns directly in Claude Desktop",
+  "long_description": "LibraLM brings a library of AI-generated book summaries to your Claude Desktop conversations. Search for books, read comprehensive summaries, explore chapter-by-chapter breakdowns, and get instant access to key insights from business, self-help, and educational books.",
+  "author": {
+    "name": "LibraLM Team",
+    "email": "support@libralm.com",
+    "url": "https://libralm.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/libralm-ai/libralm_dxt"
+  },
+  "homepage": "https://libralm.com",
+  "documentation": "https://github.com/libralm-ai/libralm_dxt",
+  "support": "https://github.com/libralm-ai/libralm_dxt/issues",
+  "icon": "icon.png",
+  "screenshots": [
+    "screenshots/search-books.png",
+    "screenshots/book-summary.png"
+  ],
+  "keywords": [
+    "books",
+    "summaries",
+    "knowledge",
+    "reading",
+    "education",
+    "business",
+    "self-help"
+  ],
+  "license": "MIT",
+  "server": {
+    "type": "node",
+    "entry_point": "libralm_mcp_server.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/libralm_mcp_server.js"],
+      "env": {
+        "LIBRALM_API_URL": "https://yjv5auah93.execute-api.us-east-1.amazonaws.com/prod",
+        "LIBRALM_API_KEY": "${user_config.api_key}"
+      }
+    }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "LibraLM API Key",
+      "description": "Your LibraLM API key from libralm.com",
+      "sensitive": true,
+      "required": true
+    }
+  },
+  "tools": [
+    {
+      "name": "list_books",
+      "description": "List all available books with their basic information",
+      "input_schema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "get_book_summary",
+      "description": "Get the main summary for a book",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string",
+            "description": "The book ID"
+          }
+        },
+        "required": ["book_id"]
+      }
+    },
+    {
+      "name": "get_book_details",
+      "description": "Get detailed information about a specific book",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string",
+            "description": "The book ID"
+          }
+        },
+        "required": ["book_id"]
+      }
+    },
+    {
+      "name": "get_table_of_contents",
+      "description": "Get the table of contents for a book with chapter descriptions",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string",
+            "description": "The book ID"
+          }
+        },
+        "required": ["book_id"]
+      }
+    },
+    {
+      "name": "get_chapter_summary",
+      "description": "Get the summary for a specific chapter of a book",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "book_id": {
+            "type": "string",
+            "description": "The book ID"
+          },
+          "chapter_number": {
+            "type": "integer",
+            "description": "The chapter number"
+          }
+        },
+        "required": ["book_id", "chapter_number"]
+      }
+    }
+  ]
+}
